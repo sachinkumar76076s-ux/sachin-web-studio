@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Sachin Web Studio - Professional Website Design, Development and SEO">
+<title>Sachin Web Studio | Professional Web Developer</title>
+
+<style>
+:root{
+ --bg:#050914;--bg2:#0b1424;--card:#0d1a2b;--text:#f7fbff;--muted:#a7b6c8;
+ --cyan:#50e6ff;--blue:#4778ff;--purple:#8b5cf6;--pink:#ec4899;
+ --line:rgba(255,255,255,.12);--shadow:0 25px 80px rgba(0,0,0,.38);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;border-radius:50%;filter:blur(110px);z-index:-2;pointer-events:none}
+body:before{width:500px;height:500px;left:-230px;top:100px;background:#50e6ff22}
+body:after{width:550px;height:550px;right:-250px;bottom:-120px;background:#8b5cf622}
+a{text-decoration:none;color:inherit}
+button,input,textarea{font:inherit}
+.container{width:min(1180px,92%);margin:auto}
+
+/* LOGIN */
+#login{
+position:fixed;inset:0;z-index:99999;display:grid;place-items:center;padding:20px;
+background:rgba(1,5,12,.86);backdrop-filter:blur(16px);
+}
+.login-box{
+width:min(440px,100%);padding:42px;border-radius:30px;position:relative;
+background:linear-gradient(145deg,#12263e,#07101d);border:1px solid var(--line);
+box-shadow:0 35px 100px #000;animation:pop .65s ease;
+}
+.login-logo{font-size:23px;font-weight:900;margin-bottom:12px}
+.login-logo span{color:var(--cyan)}
+.login-box h2{font-size:32px;line-height:1.1;margin-bottom:8px}
+.login-box h2 span{color:var(--cyan)}
+.login-box p{color:var(--muted);font-size:14px;margin-bottom:22px}
+.login-box input{
+width:100%;padding:15px;margin:6px 0;border-radius:12px;border:1px solid var(--line);
+background:#050b15;color:#fff;outline:none
+}
+.login-box input:focus{border-color:var(--cyan)}
+.login-btn,.gradient-btn{
+width:100%;border:0;padding:15px;border-radius:12px;
+background:linear-gradient(90deg,var(--cyan),#6978ff,var(--purple));
+color:#04101b;font-weight:900;cursor:pointer
+}
+.close-login{position:absolute;right:17px;top:17px;border:0;background:#fff1;color:#fff;width:35px;height:35px;border-radius:50%;cursor:pointer}
+
+/* NAV */
+header{
+position:sticky;top:0;z-index:5000;background:rgba(4,9,18,.78);
+backdrop-filter:blur(18px);border-bottom:1px solid var(--line)
+}
+.nav{height:78px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:22px;font-weight:900;letter-spacing:.5px}.logo span{color:var(--cyan)}
+nav{display:flex;align-items:center;gap:26px}
+nav a{font-size:14px;font-weight:800;color:#b9c6d5;transition:.25s;cursor:pointer}
+nav a:hover,nav a.active{color:var(--cyan)}
+.nav-cta{padding:11px 18px;border-radius:11px;background:linear-gradient(90deg,var(--cyan),#7076ff);color:#04101b!important}
+.menu{display:none;border:0;background:none;color:#fff;font-size:29px;cursor:pointer}
+
+/* PAGE */
+.page{display:none;min-height:calc(100vh - 78px)}
+.page.active{display:block;animation:pageIn .55s ease}
+
+/* HERO */
+.hero{min-height:760px;display:flex;align-items:center;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.03fr .97fr;gap:65px;align-items:center}
+.badge{display:inline-flex;padding:9px 15px;border:1px solid #50e6ff45;border-radius:50px;background:#50e6ff0b;color:#a7f4ff;font-size:11px;font-weight:900;letter-spacing:1.2px}
+.hero h1{font-size:clamp(48px,6.3vw,82px);line-height:.96;letter-spacing:-3px;margin:24px 0}
+.gradient{background:linear-gradient(90deg,#fff,#50e6ff,#8c70ff,#ec4899);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-lead{font-size:19px;color:var(--muted);max-width:670px}
+.actions{display:flex;gap:13px;flex-wrap:wrap;margin-top:30px}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:15px 22px;border-radius:13px;font-size:14px;font-weight:900;transition:.3s;border:1px solid var(--line);cursor:pointer}
+.btn:hover{transform:translateY(-4px)}
+.primary{border:0;background:linear-gradient(90deg,var(--cyan),#667cff,var(--purple));color:#04101b}
+.secondary{background:#ffffff08;color:#fff}
+.hero-visual{height:555px;position:relative}
+.hero-photo{
+position:absolute;inset:18px 0 0 35px;border-radius:32px;overflow:hidden;
+background:linear-gradient(180deg,transparent 20%,#050914f2),
+url("https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=90") center/cover;
+box-shadow:var(--shadow);border:1px solid var(--line);animation:float 5s ease-in-out infinite
+}
+.glass{
+position:absolute;padding:17px 19px;border-radius:17px;background:#07111ee8;
+border:1px solid var(--line);backdrop-filter:blur(15px);box-shadow:0 18px 50px #0008
+}
+.glass strong{display:block;font-size:20px}.glass small{color:var(--muted);font-size:11px}
+.g1{right:-5px;top:35px;animation:float2 3s infinite}.g2{left:0;bottom:35px;animation:float2 4s infinite reverse}
+.techs{display:flex;gap:7px;margin-top:8px;flex-wrap:wrap}.tech{font-size:10px;padding:5px 8px;border-radius:7px;background:#50e6ff10;color:#9af3ff}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;position:relative;margin-top:-40px;z-index:3}
+.stat{padding:24px;text-align:center;border:1px solid var(--line);border-radius:18px;background:#0b1728e8;backdrop-filter:blur(15px)}
+.stat b{font-size:29px;display:block}.stat span{font-size:12px;color:#8e9daf}
+
+/* SECTIONS */
+.section{padding:105px 0}.heading{text-align:center;max-width:780px;margin:0 auto 52px}
+.eyebrow{font-size:11px;font-weight:900;letter-spacing:2px;color:var(--cyan);text-transform:uppercase}
+.heading h2{font-size:clamp(36px,4.5vw,55px);line-height:1.08;margin:10px 0}
+.heading p{color:var(--muted);font-size:16px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{padding:31px;border:1px solid var(--line);border-radius:23px;background:linear-gradient(145deg,#ffffff0b,#ffffff03);transition:.35s}
+.card:hover{transform:translateY(-9px);border-color:#50e6ff55;box-shadow:0 25px 60px #0006}
+.icon{width:60px;height:60px;display:grid;place-items:center;border-radius:17px;background:linear-gradient(135deg,#50e6ff16,#8b5cf622);font-size:29px;margin-bottom:18px}
+.card h3{font-size:21px;margin-bottom:8px}.card p{font-size:14px;color:var(--muted)}
+
+/* FEATURE */
+.feature{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.feature-photo{
+height:500px;border-radius:30px;background:linear-gradient(180deg,transparent,#050914ed),
+url("https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=90") center/cover;
+box-shadow:var(--shadow)
+}
+.feature h2{font-size:47px;line-height:1.08;margin:10px 0 18px}.feature p{color:var(--muted)}
+.checks{display:grid;gap:14px;margin-top:25px}.check{display:flex;gap:12px;color:#c9d4df}.check b{color:var(--cyan)}
+
+/* PROCESS */
+.process{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.process-card{padding:29px;border-radius:21px;border:1px solid var(--line);background:#ffffff06}
+.process-number{font-size:43px;font-weight:900;color:#50e6ff25}.process-card h3{font-size:20px}.process-card p{font-size:13px;color:var(--muted);margin-top:6px}
+
+/* PORTFOLIO */
+.portfolio{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.project{padding:0;overflow:hidden}.project-image{height:270px;background:center/cover;transition:.5s}.project:hover .project-image{transform:scale(1.06)}
+.p1{background-image:url("https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=1200&q=90")}
+.p2{background-image:url("https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=90")}
+.p3{background-image:url("https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1200&q=90")}
+.project-info{padding:25px}.project-info small{color:var(--cyan);font-weight:900;font-size:11px}.project-info h3{margin:5px 0}.project-info p{color:var(--muted);font-size:13px}
+
+/* REVIEWS */
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.review{padding:29px;border:1px solid var(--line);border-radius:21px;background:#ffffff06}.stars{color:#50e6ff;letter-spacing:3px;margin-bottom:13px}.review p{font-size:14px;color:#aab7c6}.review strong{display:block;margin-top:17px}
+
+/* INNER PAGE */
+.page-head{text-align:center;padding:120px 20px;background:radial-gradient(circle at center,#50e6ff12,transparent 53%)}
+.page-head h1{font-size:clamp(45px,6vw,72px);line-height:1;margin:12px 0}.page-head p{max-width:700px;margin:auto;color:var(--muted);font-size:17px}
+
+/* CONTACT */
+.contact{display:grid;grid-template-columns:.8fr 1.2fr;gap:25px}.contact-box,.contact-form{padding:32px;border:1px solid var(--line);border-radius:25px;background:#ffffff07}.contact-box h2{font-size:44px;line-height:1.08;margin:10px 0 18px}.contact-box>p{color:var(--muted)}.contact-item{padding:17px 0;border-bottom:1px solid var(--line)}.contact-item small{display:block;color:#77879a}.contact-form input,.contact-form textarea{width:100%;padding:15px;border-radius:12px;border:1px solid var(--line);background:#050b15;color:#fff;outline:none}.contact-form textarea{min-height:170px;resize:vertical}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.full{grid-column:1/-1}
+
+/* CTA */
+.cta{padding:20px 0 105px}.cta-box{padding:70px 35px;text-align:center;border:1px solid #50e6ff30;border-radius:31px;background:radial-gradient(circle at center,#50e6ff14,transparent 60%),linear-gradient(135deg,#0d2239,#11152d)}.cta-box h2{font-size:clamp(34px,4.5vw,52px);line-height:1.08}.cta-box p{max-width:680px;margin:12px auto;color:var(--muted)}
+
+/* FOOTER */
+footer{padding:58px 0 25px;background:#03070f;border-top:1px solid var(--line)}.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px}.footer-grid p,.footer-grid a{display:block;color:#7e8d9f;font-size:13px;margin:7px 0}.footer-grid a:hover{color:var(--cyan)}.copyright{text-align:center;color:#5f6d7e;font-size:12px;border-top:1px solid var(--line);margin-top:30px;padding-top:18px}
+
+/* FLOAT */
+.float{position:fixed;right:20px;bottom:20px;z-index:4000;display:flex;flex-direction:column;gap:10px}.float a{width:53px;height:53px;border-radius:50%;display:grid;place-items:center;box-shadow:0 15px 35px #0008;font-size:21px}.wa{background:#22c55e}.call{background:#2563eb}
+
+/* ANIMATION */
+.reveal{opacity:0;transform:translateY(28px);transition:.8s}.reveal.show{opacity:1;transform:none}
+@keyframes pop{from{opacity:0;transform:scale(.75) translateY(25px)}to{opacity:1;transform:none}}
+@keyframes pageIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+@keyframes float{50%{transform:translateY(-12px)}}
+@keyframes float2{50%{transform:translateY(-10px)}}
+
+/* MOBILE */
+@media(max-width:850px){
+nav{display:none;position:absolute;top:78px;left:0;right:0;padding:20px;background:#07111ff8;flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--line)}
+nav.open{display:flex}.menu{display:block}
+.hero-grid,.feature,.contact{grid-template-columns:1fr}
+.hero{padding:75px 0}.hero-visual{height:430px}
+.stats,.cards,.portfolio,.reviews{grid-template-columns:1fr 1fr}.process{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){
+.hero h1{font-size:45px}.hero-lead{font-size:16px}.hero-visual{height:370px}.hero-photo{inset:12px 0 0}
+.stats,.cards,.portfolio,.reviews,.process,.footer-grid,.form-grid{grid-template-columns:1fr}
+.full{grid-column:auto}.section{padding:75px 0}.feature-photo{height:350px}.login-box{padding:30px 22px}.cta-box{padding:45px 20px}
+}
+</style>
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style id="hyderabad-contact-final">
+/* Hyderabad location card */
+.location-highlight{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin:24px 0 28px;
+  padding:18px 20px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:20px;
+  background:linear-gradient(135deg,rgba(80,230,255,.08),rgba(139,92,246,.08));
+  box-shadow:0 16px 45px rgba(0,0,0,.18);
+}
+.location-icon{
+  width:50px;
+  height:50px;
+  min-width:50px;
+  display:grid;
+  place-items:center;
+  border-radius:15px;
+  background:linear-gradient(135deg,#50e6ff,#4778ff);
+  color:#fff;
+  font-size:22px;
+}
+.location-highlight strong{display:block;color:#fff;font-size:17px}
+.location-highlight span{display:block;color:#a7b6c8;margin-top:4px;font-size:14px}
+
+/* ONE single floating contact set — no duplicate/back button */
+#quick-contact-buttons{
+  position:fixed;
+  right:24px;
+  bottom:24px;
+  z-index:999999;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+#quick-contact-buttons .quick-contact{
+  width:62px;
+  height:62px;
+  box-sizing:border-box;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:17px;
+  border:1px solid rgba(255,255,255,.16);
+  color:#fff!important;
+  text-decoration:none!important;
+  box-shadow:0 12px 28px rgba(0,0,0,.34);
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+#quick-contact-buttons .quick-contact:hover{
+  transform:translateY(-4px) scale(1.04);
+  box-shadow:0 18px 38px rgba(0,0,0,.42);
+}
+#quick-contact-buttons .whatsapp{background:#25D366!important}
+#quick-contact-buttons .call{background:#1689ff!important}
+#quick-contact-buttons i{color:#fff!important;line-height:1!important}
+#quick-contact-buttons .whatsapp i{font-size:37px}
+#quick-contact-buttons .call i{font-size:28px}
+
+@media(max-width:700px){
+  .location-highlight{padding:16px}
+  #quick-contact-buttons{right:15px;bottom:16px;gap:11px}
+  #quick-contact-buttons .quick-contact{width:55px;height:55px;border-radius:15px}
+  #quick-contact-buttons .whatsapp i{font-size:32px}
+  #quick-contact-buttons .call i{font-size:25px}
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- LOGIN POPUP -->
+<div id="login">
+  <div class="login-box">
+    <button class="close-login" onclick="closeLogin()">×</button>
+    <div class="login-logo">SACHIN <span>WEB STUDIO</span></div>
+    <h2>Welcome <span>Back</span> 👋</h2>
+    <p>Login to explore our professional website design and development services.</p>
+    
+<div class="contact-methods reveal">
+  <div class="contact-method">
+    <div class="contact-icon">☎</div>
+    <div><small>Call Directly</small><br><a href="tel:+917607627117">7607627117</a></div>
+  </div>
+  <div class="contact-method wa">
+    <div class="contact-icon">W</div>
+    <div><small>WhatsApp</small><br><a href="https://wa.me/917607627117" target="_blank" rel="noopener">7607627117</a></div>
+  </div>
+  <div class="contact-method mail">
+    <div class="contact-icon">✉</div>
+    <div><small>Email</small><br><a href="mailto:sachinkumar76076s@gail.com">sachinkumar76076s@gail.com</a></div>
+  </div>
+</div>
+
+
+<div class="location-highlight reveal">
+  <div class="location-icon"><i class="fa-solid fa-location-dot"></i></div>
+  <div>
+    <strong>Hyderabad, Telangana, India</strong>
+    <span>Serving clients across Hyderabad &amp; India</span>
+  </div>
+</div>
+
+<form onsubmit="demoLogin(event)">
+      <input type="email" placeholder="Email Address" required>
+      <input type="password" placeholder="Password" required>
+      <button class="login-btn">Login to Website →</button>
+    </form>
+    <p style="text-align:center!important;font-size:12px!important;margin:14px 0 0!important">Demo login popup</p>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+<div class="container nav">
+  <a class="logo" href="#home" onclick="showPage('home')">SACHIN <span>WEB STUDIO</span></a>
+  <button class="menu" onclick="toggleMenu()">☰</button>
+  <nav id="nav">
+    <a data-page="home" onclick="showPage('home')">Home</a>
+    <a data-page="about" onclick="showPage('about')">About</a>
+    <a data-page="services" onclick="showPage('services')">Services</a>
+    <a data-page="contact" onclick="showPage('contact')">Contact</a>
+    <a class="nav-cta" onclick="showPage('contact')">Start Project</a>
+  </nav>
+</div>
+</header>
+
+<!-- HOME -->
+<main id="home" class="page active">
+
+<section class="hero">
+<div class="container hero-grid">
+
+<div class="reveal">
+<span class="badge">✦ WEB DESIGN • DEVELOPMENT • SEO</span>
+
+<h1>
+We Create
+<span class="gradient">Professional Websites</span>
+That People Remember.
+</h1>
+
+<p class="hero-lead">
+Your website is often the first impression of your business.
+We create modern, responsive and premium websites that look
+professional, explain your services clearly and make it easy
+for customers to contact you.
+</p>
+
+<div class="actions">
+<a class="btn primary" onclick="showPage('contact')">🚀 Start Your Website</a>
+<a class="btn secondary" onclick="showPage('services')">Explore Services</a>
+</div>
+</div>
+
+<div class="hero-visual reveal">
+<div class="hero-photo"></div>
+
+<div class="glass g1">
+<strong>98%</strong>
+<small>Responsive Experience</small>
+</div>
+
+<div class="glass g2">
+<strong>Modern Technology</strong>
+<small>Designed for your business</small>
+<div class="techs">
+<span class="tech">HTML</span>
+<span class="tech">CSS</span>
+<span class="tech">WordPress</span>
+<span class="tech">SEO</span>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<div class="container stats reveal">
+<div class="stat"><b>100%</b><span>Responsive Design</span></div>
+<div class="stat"><b>SEO</b><span>Friendly Structure</span></div>
+<div class="stat"><b>Fast</b><span>Modern Performance</span></div>
+<div class="stat"><b>24/7</b><span>Online Presence</span></div>
+</div>
+
+<section class="section">
+<div class="container">
+<div class="heading reveal">
+<div class="eyebrow">WHAT WE DO</div>
+<h2>Everything Your Business Needs Online</h2>
+<p>From the first visual idea to the final launch, we focus on creating a website that looks professional and feels easy to use.</p>
+</div>
+
+<div class="cards">
+<div class="card reveal"><div class="icon">🎨</div><h3>Premium Website Design</h3><p>Modern layouts, strong typography, attractive colors and smooth animations designed to keep visitors interested.</p></div>
+<div class="card reveal"><div class="icon">💻</div><h3>Web Development</h3><p>Responsive and functional websites built for phones, tablets and desktops with a clean user experience.</p></div>
+<div class="card reveal"><div class="icon">🛒</div><h3>E-Commerce Website</h3><p>Professional online stores with product presentation, shopping experience and customer-focused design.</p></div>
+<div class="card reveal"><div class="icon">🔍</div><h3>SEO Ready</h3><p>Clean page structure and content organization designed to give search engines a better understanding of your website.</p></div>
+<div class="card reveal"><div class="icon">📱</div><h3>Mobile First</h3><p>Your website remains beautiful and easy to navigate on every screen size.</p></div>
+<div class="card reveal"><div class="icon">⚡</div><h3>Speed Focused</h3><p>A lightweight and organized experience focused on smooth navigation and fast interaction.</p></div>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="container feature">
+<div class="feature-photo reveal"></div>
+<div class="reveal">
+<div class="eyebrow">WHY CHOOSE US</div>
+<h2>A Website Should Do More Than Just Look Good.</h2>
+<p>A good business website should make visitors understand what you offer, trust your brand and know exactly what to do next.</p>
+
+<div class="checks">
+<div class="check"><b>✓</b><span>Professional and modern visual design</span></div>
+<div class="check"><b>✓</b><span>Large, readable sections with clear information</span></div>
+<div class="check"><b>✓</b><span>Responsive experience on every device</span></div>
+<div class="check"><b>✓</b><span>Strong contact and enquiry sections</span></div>
+<div class="check"><b>✓</b><span>SEO-friendly website structure</span></div>
+</div>
+
+<div class="actions">
+<a class="btn primary" onclick="showPage('about')">Learn About Us →</a>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+<div class="heading reveal">
+<div class="eyebrow">OUR PROCESS</div>
+<h2>From Your Idea To A Live Website</h2>
+<p>A simple four-step process that keeps the project clear and organized.</p>
+</div>
+
+<div class="process">
+<div class="process-card reveal"><div class="process-number">01</div><h3>Plan</h3><p>Understand your business, audience, pages and website goals.</p></div>
+<div class="process-card reveal"><div class="process-number">02</div><h3>Design</h3><p>Create the visual direction, layout, colors and user experience.</p></div>
+<div class="process-card reveal"><div class="process-number">03</div><h3>Develop</h3><p>Turn the approved design into a responsive working website.</p></div>
+<div class="process-card reveal"><div class="process-number">04</div><h3>Launch</h3><p>Prepare the website for your customers and online presence.</p></div>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+<div class="heading reveal">
+<div class="eyebrow">SELECTED WORK</div>
+<h2>Website Designs That Feel Professional</h2>
+<p>Use this section for your real client projects and portfolio work.</p>
+</div>
+
+<div class="portfolio">
+<div class="card project reveal"><div class="project-image p1"></div><div class="project-info"><small>BUSINESS WEBSITE</small><h3>Modern Business Website</h3><p>A professional business presence with strong branding and enquiry-focused sections.</p></div></div>
+<div class="card project reveal"><div class="project-image p2"></div><div class="project-info"><small>DEVELOPER PORTFOLIO</small><h3>Creative Developer Portfolio</h3><p>A modern portfolio designed to present skills, projects and services.</p></div></div>
+<div class="card project reveal"><div class="project-image p3"></div><div class="project-info"><small>E-COMMERCE</small><h3>Modern Online Store</h3><p>A clean shopping experience with strong product presentation.</p></div></div>
+</div>
+
+<div style="text-align:center;margin-top:30px">
+<a class="btn primary" onclick="showPage('services')">View Our Services →</a>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+<div class="heading reveal">
+<div class="eyebrow">CLIENT EXPERIENCE</div>
+<h2>What Clients Can Expect</h2>
+<p>Replace these demo testimonials with genuine customer feedback before publishing.</p>
+</div>
+
+<div class="reviews">
+<div class="review reveal"><div class="stars">★★★★★</div><p>Sachin Web Studio created a clean, modern and responsive website for our business. The design looks professional and works smoothly on mobile.</p><strong>— Rahul Sharma, Hyderabad</strong></div>
+<div class="review reveal"><div class="stars">★★★★★</div><p>Very professional website development service. The communication was clear and the website was designed exactly according to our requirements.</p><strong>— Amit Kumar, Hyderabad</strong></div>
+<div class="review reveal"><div class="stars">★★★★★</div><p>Our website now looks much more professional and makes it easier for customers to contact us. Great work and support</p><strong>— Priya Enterprises, Hyderabad</strong></div>
+</div>
+</div>
+</section>
+
+<section class="cta">
+<div class="container">
+<div class="cta-box reveal">
+<div class="eyebrow">LET'S BUILD SOMETHING</div>
+<h2>Ready To Make Your Business Look Professional Online?</h2>
+<p>Tell us about your business, your services and the type of website you want. Let's turn your idea into a strong online presence.</p>
+<div class="actions" style="justify-content:center">
+<a class="btn primary" onclick="showPage('contact')">🚀 Start Your Project</a>
+<a class="btn secondary" onclick="showPage('about')">Know More About Us</a>
+</div>
+</div>
+</div>
+</section>
+
+</main>
+
+<!-- ABOUT -->
+<section id="about" class="page">
+<div class="page-head">
+<div class="eyebrow">ABOUT SACHIN WEB STUDIO</div>
+<h1>We Design With Purpose.</h1>
+<p>Professional websites that combine visual design, useful information and a clear customer journey.</p>
+</div>
+
+<section class="section">
+<div class="container feature">
+<div class="feature-photo reveal"></div>
+<div class="reveal">
+<div class="eyebrow">OUR APPROACH</div>
+<h2>Design. Develop. Grow.</h2>
+<p>We believe a website should be attractive enough to create a strong first impression and practical enough to help a customer understand the business quickly.</p>
+<div class="checks">
+<div class="check"><b>✓</b><span>Clear and professional website structure</span></div>
+<div class="check"><b>✓</b><span>Large readable sections and strong visual hierarchy</span></div>
+<div class="check"><b>✓</b><span>Responsive design for mobile and desktop</span></div>
+<div class="check"><b>✓</b><span>Service-focused content and enquiry options</span></div>
+<div class="check"><b>✓</b><span>Modern animations without making the website difficult to use</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+<div class="heading reveal">
+<div class="eyebrow">OUR VALUES</div>
+<h2>What We Focus On</h2>
+<p>The foundation of a professional website experience.</p>
+</div>
+<div class="cards">
+<div class="card reveal"><div class="icon">💎</div><h3>Quality</h3><p>Clean layouts, consistent spacing and professional presentation.</p></div>
+<div class="card reveal"><div class="icon">🎯</div><h3>Purpose</h3><p>Every major section has a clear reason to exist and help the visitor.</p></div>
+<div class="card reveal"><div class="icon">🤝</div><h3>Clarity</h3><p>Simple communication and organized information make websites easier to use.</p></div>
+</div>
+</div>
+</section>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="page">
+<div class="page-head">
+
+<div class="eyebrow">OUR SERVICES</div>
+<h1>Complete Website Solutions.</h1>
+<p>Choose the services you need to build a professional online presence.</p>
+</div>
+
+<section class="section">
+<div class="container">
+<div class="cards">
+<div class="card reveal"><div class="icon">🎨</div><h3>Website Design</h3><p>Premium layouts, typography, color systems, animations and user-focused page structure.</p></div>
+<div class="card reveal"><div class="icon">💻</div><h3>Website Development</h3><p>Responsive and functional websites with clean structure and smooth interactions.</p></div>
+<div class="card reveal"><div class="icon">🌐</div><h3>WordPress Website</h3><p>Professional WordPress websites suitable for businesses, services and personal brands.</p></div>
+<div class="card reveal"><div class="icon">🛒</div><h3>E-Commerce</h3><p>Modern online stores with product presentation and customer-friendly shopping flow.</p></div>
+<div class="card reveal"><div class="icon">🔍</div><h3>SEO Setup</h3><p>SEO-ready structure, page titles, content hierarchy and technical basics.</p></div>
+<div class="card reveal"><div class="icon">⚡</div><h3>Speed Optimization</h3><p>Performance-focused page structure for a smoother website experience.</p></div>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+<div class="heading reveal">
+<div class="eyebrow">WHY WEBSITE DESIGN MATTERS</div>
+<h2>Your Website Is Your Digital First Impression.</h2>
+<p>A professional website can explain your services, build credibility and give customers a simple way to take the next step.</p>
+</div>
+<div class="feature">
+<div class="feature-photo reveal"></div>
+<div class="reveal">
+<h2>Built Around Your Business</h2>
+<p>We can organize the website around your actual services, target customers, brand style and business goals.</p>
+<div class="checks">
+<div class="check"><b>✓</b><span>Business-focused page structure</span></div>
+<div class="check"><b>✓</b><span>Professional images and visual sections</span></div>
+<div class="check"><b>✓</b><span>Strong calls-to-action</span></div>
+<div class="check"><b>✓</b><span>Contact and enquiry sections</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="page">
+<div class="page-head">
+<div class="eyebrow">CONTACT US</div>
+<h1>Let's Build Your Website.</h1>
+<p>Tell us about your business and the website you want to create.</p>
+</div>
+
+<section class="section">
+<div class="container contact">
+<div class="contact-box reveal">
+<div class="eyebrow">START A PROJECT</div>
+<h2>Have A Website Idea?</h2>
+<p>Send your requirements and we can discuss the pages, design, features and next steps.</p>
+
+<div class="contact-item"><small>📞 Phone</small><b>7607627117</b></div>
+<div class="contact-item"><small>💬 WhatsApp</small><b>7607627117</b></div>
+<div class="contact-item"><small>📧 Email</small><b>sachinkumar76076s@gail.com</b></div>
+<div class="contact-item"><small>📍 Location</small><b>India</b></div>
+</div>
+
+<form class="contact-form reveal" onsubmit="submitForm(event)">
+<div class="form-grid">
+<input required placeholder="Your Name">
+<input required type="tel" placeholder="Phone Number">
+<input class="full" type="email" placeholder="Email Address">
+<input class="full" required placeholder="What type of website do you need?">
+<textarea class="full" placeholder="Tell us about your business and website requirements..."></textarea>
+<button class="btn primary full" type="submit">🚀 Send Project Enquiry</button>
+</div>
+</form>
+</div>
+</section>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="container">
+<div class="footer-grid">
+<div>
+<h3>SACHIN <span style="color:var(--cyan)">WEB STUDIO</span></h3>
+<p>Professional website design, development and SEO solutions for modern businesses.</p>
+</div>
+<div>
+<h4>Pages</h4>
+<a onclick="showPage('home')">Home</a>
+<a onclick="showPage('about')">About</a>
+<a onclick="showPage('services')">Services</a>
+<a onclick="showPage('contact')">Contact</a>
+</div>
+<div>
+<h4>Services</h4>
+<p>Website Design</p><p>WordPress</p><p>E-Commerce</p><p>SEO</p>
+</div>
+</div>
+<div class="copyright">© 2026 Sachin Web Studio. All Rights Reserved.</div>
+</div>
+</footer>
+
+<div class="float">
+<a class="wa" href="https://wa.me/917607627117" target="_blank"></a>
+<a class="call" href="tel:+917607627117"></a>
+</div>
+
+<script>
+const loginBox=document.getElementById("login");
+
+function closeLogin(){
+    loginBox.style.display="none";
+}
+
+function demoLogin(e){
+    e.preventDefault();
+    alert("Demo Login Successful!");
+    closeLogin();
+}
+
+function toggleMenu(){
+    document.getElementById("nav").classList.toggle("open");
+}
+
+function showPage(id){
+    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+    const page=document.getElementById(id);
+    if(page) page.classList.add("active");
+
+    document.querySelectorAll("nav a[data-page]").forEach(a=>{
+        a.classList.toggle("active",a.dataset.page===id);
+    });
+
+    history.replaceState(null,"","#"+id);
+    window.scrollTo({top:0,behavior:"smooth"});
+    document.getElementById("nav").classList.remove("open");
+
+    setTimeout(()=>{
+        document.querySelectorAll(".reveal").forEach(el=>{
+            const r=el.getBoundingClientRect();
+            if(r.top < window.innerHeight*.9) el.classList.add("show");
+        });
+    },100);
+}
+
+function submitForm(e){
+    e.preventDefault();
+    alert("Thank you! Your project enquiry has been received.");
+}
+
+const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting) entry.target.classList.add("show");
+    });
+},{threshold:.12});
+
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+
+window.addEventListener("load",()=>{
+    const id=location.hash.replace("#","");
+    if(["home","about","services","contact"].includes(id)) showPage(id);
+});
+</script>
+
+
+<!-- Premium WhatsApp + Call Buttons -->
+
+<!-- ONE CLEAN WHATSAPP + CALL BUTTON SET -->
+<!-- Hyderabad Location -->
+
+<!-- SINGLE WhatsApp + Call Buttons -->
+<div id="quick-contact-buttons" aria-label="Quick contact">
+  <a href="https://wa.me/917607627117"
+     class="quick-contact whatsapp"
+     target="_blank"
+     rel="noopener"
+     aria-label="Chat on WhatsApp"
+     title="Chat on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+  <a href="tel:+917607627117"
+     class="quick-contact call"
+     aria-label="Call Now"
+     title="Call Now">
+    <i class="fa-solid fa-phone"></i>
+  </a>
+</div>
+
+</body>
+</html>
